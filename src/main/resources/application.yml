@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: shopping-cart
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/shopping_cart
+    username: admin
+    password: prueba-cuscatlan-2025
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+
+server:
+  port: 8080
+
+jwt:
+  secret: 7kBcICU60uAWdxONihMgnpbpzhH1JfKAaV31FTscJkDlsR27m90oA7BpLq8IULWBLJt8tqypB/hUahMSvQ/xAA==
+  expiration: 86400000
+
+logging:
+  level:
+    root: INFO
+    com:
+      store:
+        shoppingcart: DEBUG
+    org:
+      springframework:
+        security: DEBUG
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
