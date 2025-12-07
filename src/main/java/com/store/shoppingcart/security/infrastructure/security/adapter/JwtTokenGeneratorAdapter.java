@@ -42,7 +42,7 @@ public class JwtTokenGeneratorAdapter implements TokenGenerator {
             .signWith(SignatureAlgorithm.HS512, secretKey)
             .compact();
         
-        return new AuthToken(token, expiresAt.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+        return new AuthToken(token, expiresAt.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), user);
     }
     
     @Override

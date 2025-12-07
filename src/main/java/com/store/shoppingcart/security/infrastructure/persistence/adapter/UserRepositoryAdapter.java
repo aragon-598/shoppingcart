@@ -37,7 +37,7 @@ public class UserRepositoryAdapter implements UserRepository {
     
     @Override
     public Optional<User> findById(UserId id) {
-        return jpaRepository.findById(id.value())
+        return jpaRepository.findById(id.value().toString())
             .map(mapper::toDomain);
     }
     

@@ -4,6 +4,7 @@ import com.store.shoppingcart.common.dto.ApiResponse;
 import com.store.shoppingcart.security.application.dto.AuthenticationCommand;
 import com.store.shoppingcart.security.application.dto.RegisterUserCommand;
 import com.store.shoppingcart.security.domain.model.AuthToken;
+import com.store.shoppingcart.security.domain.model.User;
 import com.store.shoppingcart.security.domain.model.UserId;
 import com.store.shoppingcart.security.domain.port.in.AuthenticateUserUseCase;
 import com.store.shoppingcart.security.domain.port.in.RegisterUserUseCase;
@@ -11,6 +12,7 @@ import com.store.shoppingcart.security.entrypoint.rest.dto.AuthResponse;
 import com.store.shoppingcart.security.entrypoint.rest.dto.LoginRequest;
 import com.store.shoppingcart.security.entrypoint.rest.dto.RegisterRequest;
 import com.store.shoppingcart.security.entrypoint.rest.dto.RegisterResponse;
+import com.store.shoppingcart.security.entrypoint.rest.dto.UserInfoDto;
 import com.store.shoppingcart.security.entrypoint.rest.mapper.AuthDtoMapper;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -39,9 +41,16 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<ApiResponse<RegisterResponse>> register(@Valid @RequestBody RegisterRequest request) {
         RegisterUserCommand command = mapper.toCommand(request);
-        UserId userId = registerUserUseCase.execute(command);
+        User user = registerUserUseCase.execute(command);
         
-        RegisterResponse response = new RegisterResponse(userId.value().toString());
+        UserInfoDto userInfo = new UserInfoDto(
+            user.getId().value().toString(),
+            user.getEmail().value(),
+            user.getFirstName(),
+            user.getLastName()
+        );
+        
+        RegisterResponse response = new RegisterResponse(user.getId().value().toString(), userInfo);
         return ResponseEntity
             .status(HttpStatus.CREATED)
             .body(ApiResponse.success(HttpStatus.CREATED.value(), response));
@@ -52,9 +61,17 @@ public class AuthController {
         AuthenticationCommand command = mapper.toCommand(request);
         AuthToken token = authenticateUserUseCase.execute(command);
         
+        UserInfoDto userInfo = new UserInfoDto(
+            token.user().getId().value().toString(),
+            token.user().getEmail().value(),
+            token.user().getFirstName(),
+            token.user().getLastName()
+        );
+        
         AuthResponse response = new AuthResponse(
             token.value(),
-            token.expiresAt()
+            token.expiresAt(),
+            userInfo
         );
         return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK.value(), response));
     }

@@ -28,7 +28,7 @@ public class RegisterUserUseCaseImpl implements RegisterUserUseCase {
     
     @Override
     @Transactional
-    public UserId execute(RegisterUserCommand command) {
+    public User execute(RegisterUserCommand command) {
         Email email = new Email(command.email());
         
         if (userRepository.existsByEmail(email)) {
@@ -48,7 +48,6 @@ public class RegisterUserUseCaseImpl implements RegisterUserUseCase {
             LocalDateTime.now()
         );
         
-        User savedUser = userRepository.save(user);
-        return savedUser.getId();
+        return userRepository.save(user);
     }
 }

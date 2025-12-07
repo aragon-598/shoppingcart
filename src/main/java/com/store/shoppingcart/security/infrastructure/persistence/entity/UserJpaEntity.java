@@ -3,7 +3,6 @@ package com.store.shoppingcart.security.infrastructure.persistence.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import com.store.shoppingcart.security.domain.model.Role;
 
@@ -12,8 +11,8 @@ import com.store.shoppingcart.security.domain.model.Role;
 public class UserJpaEntity {
     
     @Id
-    @Column(columnDefinition = "BINARY(16)")
-    private UUID id;
+    @Column(length = 36)
+    private String id;
     
     @Column(nullable = false, unique = true)
     private String email;
@@ -54,7 +53,7 @@ public class UserJpaEntity {
     public UserJpaEntity() {
     }
     
-    public UserJpaEntity(UUID id, String email, String password, String firstName, 
+    public UserJpaEntity(String id, String email, String password, String firstName, 
                         String lastName, Role role, boolean active, LocalDateTime createdAt) {
         this.id = id;
         this.email = email;
@@ -66,11 +65,11 @@ public class UserJpaEntity {
         this.createdAt = createdAt;
     }
     
-    public UUID getId() {
+    public String getId() {
         return id;
     }
     
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
     

@@ -1,8 +1,8 @@
 package com.store.shoppingcart.security.domain.port.in;
 
 import com.store.shoppingcart.security.application.dto.RegisterUserCommand;
-import com.store.shoppingcart.security.domain.model.UserId;
+import com.store.shoppingcart.security.domain.model.User;
 
 public interface RegisterUserUseCase {
-    UserId execute(RegisterUserCommand command);
+    User execute(RegisterUserCommand command);
 }

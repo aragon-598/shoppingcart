@@ -4,5 +4,6 @@ import java.time.LocalDateTime;
 
 public record AuthResponse(
     String token,
-    LocalDateTime expiresAt
+    LocalDateTime expiresAt,
+    UserInfoDto userInfo
 ) {}
