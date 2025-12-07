@@ -8,6 +8,10 @@ import com.store.shoppingcart.clients.domain.exception.InvalidPhoneNumberExcepti
 import com.store.shoppingcart.clients.domain.exception.UserAlreadyHasClientException;
 import com.store.shoppingcart.common.dto.ApiResponse;
 import com.store.shoppingcart.common.dto.ErrorResponse;
+import com.store.shoppingcart.orders.domain.exception.ClientNotActiveException;
+import com.store.shoppingcart.orders.domain.exception.EmptyOrderException;
+import com.store.shoppingcart.orders.domain.exception.InvalidOrderStateException;
+import com.store.shoppingcart.orders.domain.exception.OrderNotFoundException;
 import com.store.shoppingcart.products.domain.exception.ExternalServiceException;
 import com.store.shoppingcart.products.domain.exception.InvalidProductDataException;
 import com.store.shoppingcart.products.domain.exception.ProductNotFoundException;
@@ -94,6 +98,22 @@ public class GlobalExceptionHandler {
         return ResponseEntity
             .status(HttpStatus.SERVICE_UNAVAILABLE)
             .body(ApiResponse.error(HttpStatus.SERVICE_UNAVAILABLE.value(), error));
+    }
+    
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<ApiResponse<Object>> handleOrderNotFound(OrderNotFoundException ex) {
+        ErrorResponse error = new ErrorResponse(ex.getMessage());
+        return ResponseEntity
+            .status(HttpStatus.NOT_FOUND)
+            .body(ApiResponse.error(HttpStatus.NOT_FOUND.value(), error));
+    }
+    
+    @ExceptionHandler({InvalidOrderStateException.class, EmptyOrderException.class, ClientNotActiveException.class})
+    public ResponseEntity<ApiResponse<Object>> handleOrderValidation(RuntimeException ex) {
+        ErrorResponse error = new ErrorResponse(ex.getMessage());
+        return ResponseEntity
+            .status(HttpStatus.BAD_REQUEST)
+            .body(ApiResponse.error(HttpStatus.BAD_REQUEST.value(), error));
     }
     
     @ExceptionHandler(MethodArgumentNotValidException.class)
