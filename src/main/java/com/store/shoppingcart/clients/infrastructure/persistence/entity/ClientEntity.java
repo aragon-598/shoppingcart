@@ -1,5 +1,6 @@
 package com.store.shoppingcart.clients.infrastructure.persistence.entity;
 
+import com.store.shoppingcart.security.infrastructure.persistence.entity.UserJpaEntity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -13,7 +14,11 @@ public class ClientEntity {
     @Column(name = "id", length = 36)
     private String id;
     
-    @Column(name = "user_id", nullable = false, length = 36, unique = true)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    private UserJpaEntity user;
+    
+    @Column(name = "user_id", nullable = false, length = 36, unique = true, insertable = false, updatable = false)
     private String userId;
     
     @Column(name = "first_name", nullable = false, length = 100)
@@ -56,12 +61,13 @@ public class ClientEntity {
     public ClientEntity() {
     }
     
-    public ClientEntity(String id, String userId, String firstName, String lastName, String documentValue,
+    public ClientEntity(String id, UserJpaEntity user, String firstName, String lastName, String documentValue,
                        DocumentTypeEntity documentType, String phoneNumber, String street, String city,
                        String state, String postalCode, String country, LocalDateTime createdAt,
                        LocalDateTime updatedAt) {
         this.id = id;
-        this.userId = userId;
+        this.user = user;
+        this.userId = user != null ? user.getId() : null;
         this.firstName = firstName;
         this.lastName = lastName;
         this.documentValue = documentValue;
@@ -90,6 +96,15 @@ public class ClientEntity {
     
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+    
+    public UserJpaEntity getUser() {
+        return user;
+    }
+    
+    public void setUser(UserJpaEntity user) {
+        this.user = user;
+        this.userId = user != null ? user.getId() : null;
     }
     
     public String getFirstName() {

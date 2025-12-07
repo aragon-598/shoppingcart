@@ -53,6 +53,7 @@ public class OrderDtoMapper {
     
     private OrderItemResponse toItemResponse(OrderItem item) {
         return new OrderItemResponse(
+            item.getId(),
             item.getProductId().value(),
             item.getProductName(),
             item.getUnitPrice().formatted(),

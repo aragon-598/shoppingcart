@@ -5,6 +5,6 @@ import com.store.shoppingcart.clients.domain.model.ClientId;
 public class ClientNotFoundException extends RuntimeException {
     
     public ClientNotFoundException(ClientId clientId) {
-        super("Client not found with ID: " + clientId.value());
+        super("Cliente no encontrado con ID: " + clientId.value());
     }
 }

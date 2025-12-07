@@ -18,8 +18,8 @@ public class ClientFactory {
     
     public static Client create(UserId userId, String firstName, String lastName, DocumentNumber documentNumber,
                                 PhoneNumber phoneNumber, Address address) {
-        validateName(firstName, "First name");
-        validateName(lastName, "Last name");
+        validateName(firstName, "Nombre");
+        validateName(lastName, "Apellido");
         
         LocalDateTime now = LocalDateTime.now();
         return new Client(
@@ -43,19 +43,19 @@ public class ClientFactory {
     
     private static void validateName(String name, String fieldName) {
         if (name == null || name.isBlank()) {
-            throw new InvalidClientDataException(fieldName + " cannot be blank");
+            throw new InvalidClientDataException(fieldName + " no puede estar vacío");
         }
         
         String trimmed = name.trim();
         
         if (trimmed.length() < MIN_NAME_LENGTH || trimmed.length() > MAX_NAME_LENGTH) {
             throw new InvalidClientDataException(
-                fieldName + " must be between " + MIN_NAME_LENGTH + " and " + MAX_NAME_LENGTH + " characters"
+                fieldName + " debe tener entre " + MIN_NAME_LENGTH + " y " + MAX_NAME_LENGTH + " caracteres"
             );
         }
         
         if (!trimmed.matches(NAME_REGEX)) {
-            throw new InvalidClientDataException(fieldName + " can only contain letters and spaces");
+            throw new InvalidClientDataException(fieldName + " solo puede contener letras y espacios");
         }
     }
 }

@@ -50,7 +50,7 @@ public class ClientController {
             request.address().street(),
             request.address().city(),
             request.address().state(),
-            request.address().postalCode(),
+            request.address().zipCode(),
             request.address().country()
         );
         
@@ -104,7 +104,7 @@ public class ClientController {
             request.address().street(),
             request.address().city(),
             request.address().state(),
-            request.address().postalCode(),
+            request.address().zipCode(),
             request.address().country()
         );
         

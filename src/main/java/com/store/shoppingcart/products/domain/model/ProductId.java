@@ -13,7 +13,7 @@ public record ProductId(Long value) {
         try {
             return new ProductId(Long.parseLong(value));
         } catch (NumberFormatException e) {
-            throw new InvalidProductDataException("Invalid product ID format: " + value);
+            throw new InvalidProductDataException("Formato de ID de producto inválido: " + value);
         }
     }
 }

@@ -38,6 +38,12 @@ public class OrderItem {
         this.subtotal = calculateSubtotal();
     }
     
+    public void setQuantity(int newQuantity) {
+        validateQuantity(newQuantity);
+        this.quantity = newQuantity;
+        this.subtotal = calculateSubtotal();
+    }
+    
     public void decreaseQuantity(int amount) {
         int newQuantity = this.quantity - amount;
         validateQuantity(newQuantity);
@@ -54,7 +60,7 @@ public class OrderItem {
     
     private void validateQuantity(int qty) {
         if (qty <= 0) {
-            throw new IllegalArgumentException("Quantity must be positive");
+            throw new IllegalArgumentException("La cantidad debe ser positiva");
         }
     }
     

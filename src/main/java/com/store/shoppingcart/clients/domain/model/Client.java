@@ -47,7 +47,7 @@ public class Client {
     
     private String validateNotBlank(String value) {
         if (value == null || value.isBlank()) {
-            throw new IllegalArgumentException("Value cannot be blank");
+            throw new IllegalArgumentException("El valor no puede estar vacío");
         }
         return value.trim();
     }

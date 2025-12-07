@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+import com.store.shoppingcart.clients.infrastructure.persistence.entity.ClientEntity;
 import com.store.shoppingcart.security.domain.model.Role;
 
 @Entity
@@ -38,6 +39,9 @@ public class UserJpaEntity {
     
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+    
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private ClientEntity client;
     
     @PrePersist
     protected void onCreate() {
@@ -135,5 +139,13 @@ public class UserJpaEntity {
     
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+    
+    public ClientEntity getClient() {
+        return client;
+    }
+    
+    public void setClient(ClientEntity client) {
+        this.client = client;
     }
 }

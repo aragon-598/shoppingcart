@@ -62,7 +62,7 @@ public class OrderController {
         OrderId orderId = OrderId.from(id);
         updateOrderStatusUseCase.confirm(orderId);
         return ResponseEntity.ok(
-            ApiResponse.success(HttpStatus.OK.value(), "Order confirmed successfully")
+            ApiResponse.success(HttpStatus.OK.value(), "Orden confirmada exitosamente")
         );
     }
     
@@ -71,7 +71,7 @@ public class OrderController {
         OrderId orderId = OrderId.from(id);
         updateOrderStatusUseCase.ship(orderId);
         return ResponseEntity.ok(
-            ApiResponse.success(HttpStatus.OK.value(), "Order shipped successfully")
+            ApiResponse.success(HttpStatus.OK.value(), "Orden enviada exitosamente")
         );
     }
     
@@ -80,7 +80,7 @@ public class OrderController {
         OrderId orderId = OrderId.from(id);
         updateOrderStatusUseCase.deliver(orderId);
         return ResponseEntity.ok(
-            ApiResponse.success(HttpStatus.OK.value(), "Order delivered successfully")
+            ApiResponse.success(HttpStatus.OK.value(), "Orden entregada exitosamente")
         );
     }
     
@@ -89,7 +89,7 @@ public class OrderController {
         OrderId orderId = OrderId.from(id);
         cancelOrderUseCase.execute(orderId);
         return ResponseEntity.ok(
-            ApiResponse.success(HttpStatus.OK.value(), "Order cancelled successfully")
+            ApiResponse.success(HttpStatus.OK.value(), "Orden cancelada exitosamente")
         );
     }
 }

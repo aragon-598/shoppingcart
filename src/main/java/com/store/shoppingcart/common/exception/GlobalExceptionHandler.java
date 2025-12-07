@@ -11,7 +11,10 @@ import com.store.shoppingcart.common.dto.ErrorResponse;
 import com.store.shoppingcart.orders.domain.exception.ClientNotActiveException;
 import com.store.shoppingcart.orders.domain.exception.EmptyOrderException;
 import com.store.shoppingcart.orders.domain.exception.InvalidOrderStateException;
+import com.store.shoppingcart.orders.domain.exception.InvalidQuantityException;
+import com.store.shoppingcart.orders.domain.exception.OrderItemNotFoundException;
 import com.store.shoppingcart.orders.domain.exception.OrderNotFoundException;
+import com.store.shoppingcart.orders.domain.exception.OrderNotModifiableException;
 import com.store.shoppingcart.products.domain.exception.ExternalServiceException;
 import com.store.shoppingcart.products.domain.exception.InvalidProductDataException;
 import com.store.shoppingcart.products.domain.exception.ProductNotFoundException;
@@ -108,12 +111,21 @@ public class GlobalExceptionHandler {
             .body(ApiResponse.error(HttpStatus.NOT_FOUND.value(), error));
     }
     
-    @ExceptionHandler({InvalidOrderStateException.class, EmptyOrderException.class, ClientNotActiveException.class})
+    @ExceptionHandler({InvalidOrderStateException.class, EmptyOrderException.class, ClientNotActiveException.class,
+                      OrderNotModifiableException.class, InvalidQuantityException.class})
     public ResponseEntity<ApiResponse<Object>> handleOrderValidation(RuntimeException ex) {
         ErrorResponse error = new ErrorResponse(ex.getMessage());
         return ResponseEntity
             .status(HttpStatus.BAD_REQUEST)
             .body(ApiResponse.error(HttpStatus.BAD_REQUEST.value(), error));
+    }
+    
+    @ExceptionHandler(OrderItemNotFoundException.class)
+    public ResponseEntity<ApiResponse<Object>> handleOrderItemNotFound(OrderItemNotFoundException ex) {
+        ErrorResponse error = new ErrorResponse(ex.getMessage());
+        return ResponseEntity
+            .status(HttpStatus.NOT_FOUND)
+            .body(ApiResponse.error(HttpStatus.NOT_FOUND.value(), error));
     }
     
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -128,7 +140,7 @@ public class GlobalExceptionHandler {
             })
             .collect(Collectors.toList());
         
-        ErrorResponse error = new ErrorResponse("Validation failed", details);
+        ErrorResponse error = new ErrorResponse("Validación fallida", details);
         return ResponseEntity
             .status(HttpStatus.BAD_REQUEST)
             .body(ApiResponse.error(HttpStatus.BAD_REQUEST.value(), error));
@@ -136,7 +148,7 @@ public class GlobalExceptionHandler {
     
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Object>> handleGenericException(Exception ex) {
-        ErrorResponse error = new ErrorResponse("Internal server error: " + ex.getMessage());
+        ErrorResponse error = new ErrorResponse("Error interno del servidor: " + ex.getMessage());
         return ResponseEntity
             .status(HttpStatus.INTERNAL_SERVER_ERROR)
             .body(ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), error));

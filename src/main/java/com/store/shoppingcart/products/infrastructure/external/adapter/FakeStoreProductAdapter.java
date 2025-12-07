@@ -37,7 +37,7 @@ public class FakeStoreProductAdapter implements ProductProviderPort {
         } catch (FeignException.NotFound e) {
             throw new ProductNotFoundException(id);
         } catch (FeignException e) {
-            throw new ExternalServiceException("FakeStore API unavailable", e);
+            throw new ExternalServiceException("API de FakeStore no disponible", e);
         }
     }
     
@@ -49,7 +49,7 @@ public class FakeStoreProductAdapter implements ProductProviderPort {
             List<FakeStoreProductDto> dtos = client.getAllProducts();
             return mapper.toDomain(dtos);
         } catch (FeignException e) {
-            throw new ExternalServiceException("FakeStore API unavailable", e);
+            throw new ExternalServiceException("API de FakeStore no disponible", e);
         }
     }
     
@@ -61,7 +61,7 @@ public class FakeStoreProductAdapter implements ProductProviderPort {
             List<FakeStoreProductDto> dtos = client.getProducts(limit);
             return mapper.toDomain(dtos);
         } catch (FeignException e) {
-            throw new ExternalServiceException("FakeStore API unavailable", e);
+            throw new ExternalServiceException("API de FakeStore no disponible", e);
         }
     }
     
@@ -73,7 +73,7 @@ public class FakeStoreProductAdapter implements ProductProviderPort {
             List<FakeStoreProductDto> dtos = client.getProductsByCategory(category.getValue());
             return mapper.toDomain(dtos);
         } catch (FeignException e) {
-            throw new ExternalServiceException("FakeStore API unavailable", e);
+            throw new ExternalServiceException("API de FakeStore no disponible", e);
         }
     }
     
@@ -87,29 +87,29 @@ public class FakeStoreProductAdapter implements ProductProviderPort {
                 .map(Category::fromValue)
                 .toList();
         } catch (FeignException e) {
-            throw new ExternalServiceException("FakeStore API unavailable", e);
+            throw new ExternalServiceException("API de FakeStore no disponible", e);
         }
     }
     
     // Fallback methods
     private Product findByIdFallback(ProductId id, Throwable t) {
-        throw new ExternalServiceException("Product service temporarily unavailable. Please try again later.", t);
+        throw new ExternalServiceException("Servicio de productos temporalmente no disponible. Por favor intenta de nuevo más tarde.", t);
     }
     
     private List<Product> findAllNoLimitFallback(Throwable t) {
-        throw new ExternalServiceException("Product service temporarily unavailable. Please try again later.", t);
+        throw new ExternalServiceException("Servicio de productos temporalmente no disponible. Por favor intenta de nuevo más tarde.", t);
     }
     
     private List<Product> findAllWithLimitFallback(int limit, Throwable t) {
-        throw new ExternalServiceException("Product service temporarily unavailable. Please try again later.", t);
+        throw new ExternalServiceException("Servicio de productos temporalmente no disponible. Por favor intenta de nuevo más tarde.", t);
     }
     
     private List<Product> findByCategoryFallback(Category category, Throwable t) {
-        throw new ExternalServiceException("Product service temporarily unavailable. Please try again later.", t);
+        throw new ExternalServiceException("Servicio de productos temporalmente no disponible. Por favor intenta de nuevo más tarde.", t);
     }
     
     private List<Category> findAllCategoriesFallback(Throwable t) {
-        throw new ExternalServiceException("Product service temporarily unavailable. Please try again later.", t);
+        throw new ExternalServiceException("Servicio de productos temporalmente no disponible. Por favor intenta de nuevo más tarde.", t);
     }
     
 }

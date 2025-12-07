@@ -49,7 +49,7 @@ public record Money(BigDecimal amount, Currency currency) {
     
     private void validateSameCurrency(Money other) {
         if (!currency.equals(other.currency)) {
-            throw new IllegalArgumentException("Cannot operate with different currencies");
+            throw new IllegalArgumentException("No se pueden realizar operaciones con diferentes monedas");
         }
     }
 }

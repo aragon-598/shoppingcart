@@ -13,7 +13,7 @@ public record DocumentNumber(String value, DocumentType type) {
     
     private void validateDocumentNumber(String value, DocumentType type) {
         if (value == null || value.isBlank()) {
-            throw new InvalidDocumentException("Document number cannot be blank");
+            throw new InvalidDocumentException("El número de documento no puede estar vacío");
         }
         
         String cleaned = value.replaceAll("[^0-9]", "");
@@ -21,17 +21,17 @@ public record DocumentNumber(String value, DocumentType type) {
         switch (type) {
             case DUI -> {
                 if (cleaned.length() != DUI_LENGTH) {
-                    throw new InvalidDocumentException("DUI must have 9 digits");
+                    throw new InvalidDocumentException("El DUI debe tener 9 dígitos");
                 }
             }
             case NIT -> {
                 if (cleaned.length() != NIT_LENGTH) {
-                    throw new InvalidDocumentException("NIT must have 14 digits");
+                    throw new InvalidDocumentException("El NIT debe tener 14 dígitos");
                 }
             }
             case PASSPORT -> {
                 if (cleaned.length() < 6 || cleaned.length() > 12) {
-                    throw new InvalidDocumentException("Passport must have between 6 and 12 characters");
+                    throw new InvalidDocumentException("El pasaporte debe tener entre 6 y 12 caracteres");
                 }
             }
         }

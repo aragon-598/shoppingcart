@@ -15,7 +15,7 @@ public record Address(
     
     private void validateNotBlank(String value, String fieldName) {
         if (value == null || value.isBlank()) {
-            throw new IllegalArgumentException(fieldName + " cannot be blank");
+            throw new IllegalArgumentException(fieldName + " no puede estar vacío");
         }
     }
     

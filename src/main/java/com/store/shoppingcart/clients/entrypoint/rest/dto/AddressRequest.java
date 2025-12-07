@@ -3,16 +3,16 @@ package com.store.shoppingcart.clients.entrypoint.rest.dto;
 import jakarta.validation.constraints.NotBlank;
 
 public record AddressRequest(
-    @NotBlank(message = "Street is required")
+    @NotBlank(message = "La calle es requerida")
     String street,
     
-    @NotBlank(message = "City is required")
+    @NotBlank(message = "La ciudad es requerida")
     String city,
     
     String state,
     
-    String postalCode,
+    String zipCode,
     
-    @NotBlank(message = "Country is required")
+    @NotBlank(message = "El país es requerido")
     String country
 ) {}

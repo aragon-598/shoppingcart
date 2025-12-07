@@ -8,6 +8,8 @@ import com.store.shoppingcart.clients.infrastructure.persistence.JpaClientReposi
 import com.store.shoppingcart.clients.infrastructure.persistence.entity.ClientEntity;
 import com.store.shoppingcart.clients.infrastructure.persistence.mapper.ClientMapper;
 import com.store.shoppingcart.security.domain.model.UserId;
+import com.store.shoppingcart.security.infrastructure.persistence.entity.UserJpaEntity;
+import com.store.shoppingcart.security.infrastructure.persistence.repository.UserJpaRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -20,14 +22,19 @@ import java.util.stream.Collectors;
 public class ClientRepositoryAdapter implements ClientRepository {
     
     private final JpaClientRepository jpaClientRepository;
+    private final UserJpaRepository userJpaRepository;
     
-    public ClientRepositoryAdapter(JpaClientRepository jpaClientRepository) {
+    public ClientRepositoryAdapter(JpaClientRepository jpaClientRepository, UserJpaRepository userJpaRepository) {
         this.jpaClientRepository = jpaClientRepository;
+        this.userJpaRepository = userJpaRepository;
     }
     
     @Override
     public Client save(Client client) {
-        ClientEntity entity = ClientMapper.toEntity(client);
+        UserJpaEntity user = userJpaRepository.findById(client.getUserId().value().toString())
+            .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado con ID: " + client.getUserId().value()));
+        
+        ClientEntity entity = ClientMapper.toEntity(client, user);
         ClientEntity saved = jpaClientRepository.save(entity);
         return ClientMapper.toDomain(saved);
     }

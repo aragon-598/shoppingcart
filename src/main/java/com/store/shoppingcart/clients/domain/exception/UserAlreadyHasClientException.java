@@ -5,6 +5,6 @@ import com.store.shoppingcart.security.domain.model.UserId;
 public class UserAlreadyHasClientException extends RuntimeException {
     
     public UserAlreadyHasClientException(UserId userId) {
-        super("User already has a client profile: " + userId.value());
+        super("El usuario ya tiene un perfil de cliente: " + userId.value());
     }
 }

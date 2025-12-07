@@ -5,15 +5,16 @@ import com.store.shoppingcart.clients.domain.model.*;
 import com.store.shoppingcart.clients.infrastructure.persistence.entity.ClientEntity;
 import com.store.shoppingcart.clients.infrastructure.persistence.entity.DocumentTypeEntity;
 import com.store.shoppingcart.security.domain.model.UserId;
+import com.store.shoppingcart.security.infrastructure.persistence.entity.UserJpaEntity;
 
 import java.util.UUID;
 
 public class ClientMapper {
     
-    public static ClientEntity toEntity(Client client) {
+    public static ClientEntity toEntity(Client client, UserJpaEntity user) {
         return new ClientEntity(
             client.getId().value().toString(),
-            client.getUserId().value().toString(),
+            user,
             client.getFirstName(),
             client.getLastName(),
             client.getDocumentNumber().value(),

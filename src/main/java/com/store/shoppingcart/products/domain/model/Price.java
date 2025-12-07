@@ -34,7 +34,7 @@ public record Price(BigDecimal amount, Currency currency) {
     
     private void validateSameCurrency(Price other) {
         if (!currency.equals(other.currency)) {
-            throw new IllegalArgumentException("Cannot compare prices with different currencies");
+            throw new IllegalArgumentException("No se pueden comparar precios con diferentes monedas");
         }
     }
 }

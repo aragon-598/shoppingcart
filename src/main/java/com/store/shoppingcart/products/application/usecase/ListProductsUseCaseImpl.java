@@ -24,7 +24,7 @@ public class ListProductsUseCaseImpl implements ListProductsUseCase {
     @Override
     public List<Product> execute(int limit) {
         if (limit <= 0) {
-            throw new IllegalArgumentException("Limit must be positive");
+            throw new IllegalArgumentException("El límite debe ser positivo");
         }
         return productProvider.findAll(limit);
     }
