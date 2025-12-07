@@ -8,6 +8,9 @@ import com.store.shoppingcart.clients.domain.exception.InvalidPhoneNumberExcepti
 import com.store.shoppingcart.clients.domain.exception.UserAlreadyHasClientException;
 import com.store.shoppingcart.common.dto.ApiResponse;
 import com.store.shoppingcart.common.dto.ErrorResponse;
+import com.store.shoppingcart.products.domain.exception.ExternalServiceException;
+import com.store.shoppingcart.products.domain.exception.InvalidProductDataException;
+import com.store.shoppingcart.products.domain.exception.ProductNotFoundException;
 import com.store.shoppingcart.security.domain.exception.InvalidCredentialsException;
 import com.store.shoppingcart.security.domain.exception.InvalidEmailException;
 import com.store.shoppingcart.security.domain.exception.UserAlreadyExistsException;
@@ -68,12 +71,29 @@ public class GlobalExceptionHandler {
     
     @ExceptionHandler({InvalidEmailException.class, WeakPasswordException.class, 
                       InvalidPhoneNumberException.class, InvalidDocumentException.class,
-                      InvalidClientDataException.class, IllegalArgumentException.class})
+                      InvalidClientDataException.class, InvalidProductDataException.class,
+                      IllegalArgumentException.class})
     public ResponseEntity<ApiResponse<Object>> handleValidationExceptions(RuntimeException ex) {
         ErrorResponse error = new ErrorResponse(ex.getMessage());
         return ResponseEntity
             .status(HttpStatus.BAD_REQUEST)
             .body(ApiResponse.error(HttpStatus.BAD_REQUEST.value(), error));
+    }
+    
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<ApiResponse<Object>> handleProductNotFound(ProductNotFoundException ex) {
+        ErrorResponse error = new ErrorResponse(ex.getMessage());
+        return ResponseEntity
+            .status(HttpStatus.NOT_FOUND)
+            .body(ApiResponse.error(HttpStatus.NOT_FOUND.value(), error));
+    }
+    
+    @ExceptionHandler(ExternalServiceException.class)
+    public ResponseEntity<ApiResponse<Object>> handleExternalService(ExternalServiceException ex) {
+        ErrorResponse error = new ErrorResponse(ex.getMessage());
+        return ResponseEntity
+            .status(HttpStatus.SERVICE_UNAVAILABLE)
+            .body(ApiResponse.error(HttpStatus.SERVICE_UNAVAILABLE.value(), error));
     }
     
     @ExceptionHandler(MethodArgumentNotValidException.class)

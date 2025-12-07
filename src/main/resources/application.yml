@@ -10,12 +10,25 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     show-sql: false
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
+  
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+  
+  cloud:
+    openfeign:
+      client:
+        config:
+          fake-store-api:
+            connect-timeout: 5000
+            read-timeout: 5000
+            logger-level: BASIC
 
 server:
   port: 8080
@@ -23,6 +36,28 @@ server:
 jwt:
   secret: 7kBcICU60uAWdxONihMgnpbpzhH1JfKAaV31FTscJkDlsR27m90oA7BpLq8IULWBLJt8tqypB/hUahMSvQ/xAA==
   expiration: 86400000
+
+external:
+  fakestore:
+    url: https://fakestoreapi.com
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      fakestore:
+        register-health-indicator: true
+        sliding-window-size: 10
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 60000
+        permitted-number-of-calls-in-half-open-state: 3
+  
+  retry:
+    instances:
+      fakestore:
+        max-attempts: 3
+        wait-duration: 1000
+        enable-exponential-backoff: true
+        exponential-backoff-multiplier: 2
 
 logging:
   level:
