@@ -64,6 +64,9 @@ public class Order {
         if (status == OrderStatus.DELIVERED) {
             throw new InvalidOrderStateException("No se puede cancelar una orden entregada");
         }
+        if (status == OrderStatus.SHIPPED) {
+            throw new InvalidOrderStateException("No se puede cancelar una orden que ya fue enviada");
+        }
         this.status = OrderStatus.CANCELLED;
         this.updatedAt = LocalDateTime.now();
     }
