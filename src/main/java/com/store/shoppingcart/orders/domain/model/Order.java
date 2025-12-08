@@ -37,6 +37,17 @@ public class Order {
         this.updatedAt = LocalDateTime.now();
     }
     
+    public void markAsPaid() {
+        if (this.status != OrderStatus.CONFIRMED) {
+            throw new InvalidOrderStateException(
+                "Solo se pueden marcar como pagadas las órdenes confirmadas"
+            );
+        }
+        // La orden permanece en CONFIRMED después del pago
+        // El estado no cambia, solo se registra el pago en la tabla payments
+        this.updatedAt = LocalDateTime.now();
+    }
+    
     public void ship() {
         validateCanTransitionTo(OrderStatus.SHIPPED);
         this.status = OrderStatus.SHIPPED;
