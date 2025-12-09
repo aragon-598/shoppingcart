@@ -15,10 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/clients")
+@RequestMapping("/api/v1/clients")
 @Tag(name = "Clients", description = "Client management endpoints")
 public class ClientController {
     
@@ -87,7 +86,7 @@ public class ClientController {
         List<Client> clients = listClientsUseCase.execute(page, size);
         List<ClientResponse> responses = clients.stream()
             .map(ClientResponse::from)
-            .collect(Collectors.toList());
+            .toList();
         
         return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK.value(), responses));
     }

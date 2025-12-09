@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/orders/{orderId}/items")
+@RequestMapping("/api/v1/orders/{orderId}/items")
 public class OrderItemController {
     
     private final AddItemToOrderUseCase addItemUseCase;
