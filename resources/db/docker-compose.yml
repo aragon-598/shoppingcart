@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   mysql:
     image: mysql:8.0
@@ -13,8 +11,36 @@ services:
       - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
+    networks:
+      - shopping-cart-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  shopping-cart-app:
+    image: shopping-cart:latest
+    container_name: shopping-cart-app
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/shopping_cart
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: prueba-cuscatlan-2025
+    ports:
+      - "8080:8080"
+    networks:
+      - shopping-cart-network
+    restart: always
+
+networks:
+  shopping-cart-network:
+    driver: bridge
 
 volumes:
   mysql_data:

@@ -3,14 +3,14 @@ spring:
     name: shopping-cart
 
   datasource:
-    url: jdbc:mysql://localhost:3307/shopping_cart
-    username: admin
-    password: prueba-cuscatlan-2025
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3307/shopping_cart}
+    username: ${SPRING_DATASOURCE_USERNAME:admin}
+    password: ${SPRING_DATASOURCE_PASSWORD:prueba-cuscatlan-2025}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
     show-sql: false
     properties:
       hibernate:
@@ -18,8 +18,7 @@ spring:
         format_sql: true
   
   flyway:
-    enabled: true
-    baseline-on-migrate: true
+    enabled: false
   
   cloud:
     openfeign:
