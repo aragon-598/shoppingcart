@@ -1,0 +1,486 @@
+{
+	"info": {
+		"_postman_id": "c2b4f8d7-8238-430f-8bd0-4f09b65fe997",
+		"name": "shoppingcart-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "14083426"
+	},
+	"item": [
+		{
+			"name": "security",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"alejandro.aragon@gmail.com\",\r\n  \"password\": \"alejandro123\",\r\n  \"firstName\": \"Alejandro\",\r\n  \"lastName\": \"Aragon\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{DEV}}/auth/register"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"alejandro.aragon@gmail.com\",\r\n  \"password\": \"alejandro123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{DEV}}/auth/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "clients",
+			"item": [
+				{
+					"name": "createClient",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MDg1MTExLCJleHAiOjE3NjUxNzE1MTF9.yju4TxGK32qnwUJxWap3gBxcoxxcV1YdKnVlyVivuYOZD0Nyey7DVXO210i8HIGHn43qdSi7I5LH9ovdlKorRw"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\":\"76f02830-7f60-4df2-99b1-f7f7960f1fd3\",\r\n  \"firstName\": \"José\",\r\n  \"lastName\": \"Rugamas\",\r\n  \"documentNumber\":\"12345670-9\",\r\n  \"documentType\":\"DUI\",\r\n  \"phoneNumber\":\"1234-5678\",\r\n  \"address\":{\r\n    \"street\":\"Calle principal\",\r\n    \"city\":\"Santa Ana\",\r\n    \"state\":\"Santa Ana\",\r\n    \"postalCode\":\"2201\",\r\n    \"country\":\"SV\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{DEV}}/api/clients"
+					},
+					"response": []
+				},
+				{
+					"name": "updateClient",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MDg1MTExLCJleHAiOjE3NjUxNzE1MTF9.yju4TxGK32qnwUJxWap3gBxcoxxcV1YdKnVlyVivuYOZD0Nyey7DVXO210i8HIGHn43qdSi7I5LH9ovdlKorRw"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\":\"76f02830-7f60-4df2-99b1-f7f7960f1fd3\",\r\n  \"firstName\": \"Alejandro\",\r\n  \"lastName\": \"Aragon\",\r\n  \"documentNumber\":\"12345678-9\",\r\n  \"documentType\":\"DUI\",\r\n  \"phoneNumber\":\"1234-8765\",\r\n  \"address\":{\r\n    \"street\":\"Calle principal\",\r\n    \"city\":\"Santa Ana Centro\",\r\n    \"state\":\"Santa Ana\",\r\n    \"postalCode\":\"2101\",\r\n    \"country\":\"SV\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{DEV}}/api/clients/a3331c87-2153-49e6-ac3d-7365a0e8ce99"
+					},
+					"response": []
+				},
+				{
+					"name": "getClientByID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MDg1MTExLCJleHAiOjE3NjUxNzE1MTF9.yju4TxGK32qnwUJxWap3gBxcoxxcV1YdKnVlyVivuYOZD0Nyey7DVXO210i8HIGHn43qdSi7I5LH9ovdlKorRw"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\":\"76f02830-7f60-4df2-99b1-f7f7960f1fd3\",\r\n  \"firstName\": \"Alejandro\",\r\n  \"lastName\": \"Aragon\",\r\n  \"documentNumber\":\"12345678-9\",\r\n  \"documentType\":\"DUI\",\r\n  \"phoneNumber\":\"1234-5678\",\r\n  \"address\":{\r\n    \"street\":\"Calle principal\",\r\n    \"city\":\"Santa Ana\",\r\n    \"state\":\"Santa Ana\",\r\n    \"postalCode\":\"2201\",\r\n    \"country\":\"SV\"\r\n  }\r\n}"
+						},
+						"url": "{{DEV}}/api/clients/a3331c87-2153-49e6-ac3d-7365a0e8ce99"
+					},
+					"response": []
+				},
+				{
+					"name": "pageable",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MTM0NDc0LCJleHAiOjE3NjUyMjA4NzR9.-Vn-lgHE_PjhCX_SPayQtJJTumhS6cveZIlDcnG48nN2RSCyKS0lagjFJIPqctCEfh53tscTyyaybYDMnCYNQg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEV}}/api/clients?page=0&size20",
+							"host": [
+								"{{DEV}}"
+							],
+							"path": [
+								"api",
+								"clients"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size20",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "productById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MTM0NDc0LCJleHAiOjE3NjUyMjA4NzR9.-Vn-lgHE_PjhCX_SPayQtJJTumhS6cveZIlDcnG48nN2RSCyKS0lagjFJIPqctCEfh53tscTyyaybYDMnCYNQg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{DEV}}/api/products/13"
+					},
+					"response": []
+				},
+				{
+					"name": "productsListLimit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MDg2NzIwLCJleHAiOjE3NjUxNzMxMjB9.ZkT2NP7R3sbXYZOIqKL-F7gGeSMq11a9Yqmni8DCCILq8PYCAuDGQDtOr1JUh4kY-sZPHoGGYYtSSbUqsC-EQw"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{DEV}}/api/products?limit=2",
+							"host": [
+								"{{DEV}}"
+							],
+							"path": [
+								"api",
+								"products"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "productByCategory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MDg2NzIwLCJleHAiOjE3NjUxNzMxMjB9.ZkT2NP7R3sbXYZOIqKL-F7gGeSMq11a9Yqmni8DCCILq8PYCAuDGQDtOr1JUh4kY-sZPHoGGYYtSSbUqsC-EQw"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{DEV}}/api/products/category/jewelery"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order",
+			"item": [
+				{
+					"name": "createOrder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MTM0NDc0LCJleHAiOjE3NjUyMjA4NzR9.-Vn-lgHE_PjhCX_SPayQtJJTumhS6cveZIlDcnG48nN2RSCyKS0lagjFJIPqctCEfh53tscTyyaybYDMnCYNQg"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"clientId\":\"a3331c87-2153-49e6-ac3d-7365a0e8ce99\",\r\n    \"items\":[\r\n        {\r\n            \"productId\": 15,\r\n            \"quantity\":1\r\n        },\r\n                {\r\n            \"productId\": 13,\r\n            \"quantity\":1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{DEV}}/api/orders"
+					},
+					"response": []
+				},
+				{
+					"name": "orderByID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MTM0NDc0LCJleHAiOjE3NjUyMjA4NzR9.-Vn-lgHE_PjhCX_SPayQtJJTumhS6cveZIlDcnG48nN2RSCyKS0lagjFJIPqctCEfh53tscTyyaybYDMnCYNQg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{DEV}}/api/orders/23d2e5bf-47bf-493f-9035-f61672e3245d"
+					},
+					"response": []
+				},
+				{
+					"name": "confirmOrder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MTM0NDc0LCJleHAiOjE3NjUyMjA4NzR9.-Vn-lgHE_PjhCX_SPayQtJJTumhS6cveZIlDcnG48nN2RSCyKS0lagjFJIPqctCEfh53tscTyyaybYDMnCYNQg"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": "{{DEV}}/api/orders/e4f9a2e3-4e82-49b4-8e8c-b4df37e6c531/confirm"
+					},
+					"response": []
+				},
+				{
+					"name": "shipOrder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MTM0NDc0LCJleHAiOjE3NjUyMjA4NzR9.-Vn-lgHE_PjhCX_SPayQtJJTumhS6cveZIlDcnG48nN2RSCyKS0lagjFJIPqctCEfh53tscTyyaybYDMnCYNQg"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": "{{DEV}}/api/orders/e4f9a2e3-4e82-49b4-8e8c-b4df37e6c531/ship"
+					},
+					"response": []
+				},
+				{
+					"name": "deliverOrder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MTM0NDc0LCJleHAiOjE3NjUyMjA4NzR9.-Vn-lgHE_PjhCX_SPayQtJJTumhS6cveZIlDcnG48nN2RSCyKS0lagjFJIPqctCEfh53tscTyyaybYDMnCYNQg"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": "{{DEV}}/api/orders/e4f9a2e3-4e82-49b4-8e8c-b4df37e6c531/deliver"
+					},
+					"response": []
+				},
+				{
+					"name": "cancelOrder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MTM0NDc0LCJleHAiOjE3NjUyMjA4NzR9.-Vn-lgHE_PjhCX_SPayQtJJTumhS6cveZIlDcnG48nN2RSCyKS0lagjFJIPqctCEfh53tscTyyaybYDMnCYNQg"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": "{{DEV}}/api/orders/902a3366-84f9-46b2-8f19-1193ed22976c/cancel"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "orderItem",
+			"item": [
+				{
+					"name": "itemsByOrderID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MTM0NDc0LCJleHAiOjE3NjUyMjA4NzR9.-Vn-lgHE_PjhCX_SPayQtJJTumhS6cveZIlDcnG48nN2RSCyKS0lagjFJIPqctCEfh53tscTyyaybYDMnCYNQg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{DEV}}/api/orders/c067d35b-f493-44de-bad4-faa411c835ac/items"
+					},
+					"response": []
+				},
+				{
+					"name": "itemById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MTM0NDc0LCJleHAiOjE3NjUyMjA4NzR9.-Vn-lgHE_PjhCX_SPayQtJJTumhS6cveZIlDcnG48nN2RSCyKS0lagjFJIPqctCEfh53tscTyyaybYDMnCYNQg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{DEV}}/api/orders/c067d35b-f493-44de-bad4-faa411c835ac/items/1"
+					},
+					"response": []
+				},
+				{
+					"name": "deletItemByItem",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MTM0NDc0LCJleHAiOjE3NjUyMjA4NzR9.-Vn-lgHE_PjhCX_SPayQtJJTumhS6cveZIlDcnG48nN2RSCyKS0lagjFJIPqctCEfh53tscTyyaybYDMnCYNQg"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "{{DEV}}/api/orders/23d2e5bf-47bf-493f-9035-f61672e3245d/items/6"
+					},
+					"response": []
+				},
+				{
+					"name": "addItem",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MTM0NDc0LCJleHAiOjE3NjUyMjA4NzR9.-Vn-lgHE_PjhCX_SPayQtJJTumhS6cveZIlDcnG48nN2RSCyKS0lagjFJIPqctCEfh53tscTyyaybYDMnCYNQg"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"productId\":6,\r\n \"quantity\":1   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{DEV}}/api/orders/23d2e5bf-47bf-493f-9035-f61672e3245d/items"
+					},
+					"response": []
+				},
+				{
+					"name": "uptadeItemQuantity",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MTM0NDc0LCJleHAiOjE3NjUyMjA4NzR9.-Vn-lgHE_PjhCX_SPayQtJJTumhS6cveZIlDcnG48nN2RSCyKS0lagjFJIPqctCEfh53tscTyyaybYDMnCYNQg"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"quantity\":3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{DEV}}/api/orders/23d2e5bf-47bf-493f-9035-f61672e3245d/items/3/quantity"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payment",
+			"item": [
+				{
+					"name": "processPayment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MTM0NDc0LCJleHAiOjE3NjUyMjA4NzR9.-Vn-lgHE_PjhCX_SPayQtJJTumhS6cveZIlDcnG48nN2RSCyKS0lagjFJIPqctCEfh53tscTyyaybYDMnCYNQg"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"method\":\"CARD\",\r\n    \"cardDetails\":{\r\n        \"cardNumber\":\"4242424242424242\",\r\n        \"cardHolderName\": \"Alejandro Aragon\",\r\n        \"expirationDate\":\"08/26\",\r\n        \"cvv\":\"123\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{DEV}}/api/payments/orders/e4f9a2e3-4e82-49b4-8e8c-b4df37e6c531"
+					},
+					"response": []
+				},
+				{
+					"name": "getPaymentByfOrder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MTM0NDc0LCJleHAiOjE3NjUyMjA4NzR9.-Vn-lgHE_PjhCX_SPayQtJJTumhS6cveZIlDcnG48nN2RSCyKS0lagjFJIPqctCEfh53tscTyyaybYDMnCYNQg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{DEV}}/api/payments/orders/902a3366-84f9-46b2-8f19-1193ed22976c"
+					},
+					"response": []
+				},
+				{
+					"name": "refund",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkODI0MThiZi1hZDBmLTRhNjAtYjcwZi03YWVhNDg3YTRjMTkiLCJlbWFpbCI6ImFsZWphbmRyby5hcmFnb25AZ21haWwuY29tIiwicm9sZSI6IkNVU1RPTUVSIiwiaWF0IjoxNzY1MTM0NDc0LCJleHAiOjE3NjUyMjA4NzR9.-Vn-lgHE_PjhCX_SPayQtJJTumhS6cveZIlDcnG48nN2RSCyKS0lagjFJIPqctCEfh53tscTyyaybYDMnCYNQg"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"url": "{{DEV}}/api/payments/8331cb0f-fe5c-451a-a91f-a8092736d046/refund"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

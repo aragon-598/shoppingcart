@@ -280,6 +280,13 @@ POST /auth/register
 
 Se incluye una colección completa de Postman con todos los endpoints configurados.
 
+###
+
+La ruta donde se encuentra la colección es:
+
+`resources/postman/shoppingcart-test.postman_collection.json`
+
+
 ### Variables de Entorno
 
 Crear un environment con:
